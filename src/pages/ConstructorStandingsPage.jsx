@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ERGASTAPI } from "../constants";
 
-
-export function ConstructorStandingsPage() {
+const ConstructorStandingsPage = () => {
     const [constructorStandings, setConstructorStandings] = useState([]);
 
     useEffect(() => {
@@ -41,3 +40,5 @@ export function ConstructorStandingsPage() {
 
     );
 }
+
+export default ConstructorStandingsPage

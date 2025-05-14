@@ -17,7 +17,7 @@ export function RaceCard({ race }) {
 
 
             <div className="flex items-center mb-2">
-                <span className="text-2xl mr-2">{getFlag(race.Circuit.Location.country)}</span>
+                <span className="text-2xl/4 mr-2">{getFlag(race.Circuit.Location.country)}</span>
                 <h2 className="text-xl font-semibold">{race.raceName}</h2>
             </div>
 

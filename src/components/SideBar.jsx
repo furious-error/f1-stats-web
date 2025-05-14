@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export function SideBar(){
 
+const SideBar = () => {
     return (
         <aside className="w-64 min-h-screen fixed top-0 text-white p-6 bg-blue-950">
             <div className="flex items-center mb-10">
@@ -24,3 +24,5 @@ export function SideBar(){
         </aside>
     );
 }
+
+export default SideBar

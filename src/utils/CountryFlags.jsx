@@ -9,6 +9,6 @@ export function getFlag(country) {
     return <ReactCountryFlag
         countryCode={code}
         svg
-        style={{ width: "1em", height: "1em" }}
+        style={{ width: "1.2em", height: "1em", border: "1px solid black", objectFit: "cover"}}
     />;
 }

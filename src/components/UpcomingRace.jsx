@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getCircuitImage } from "../utils/helper";
 import {getFlag} from "../utils/CountryFlags"
 
-export function CountdownToNextEvent({races}) {
+const UpcomingRace = ({races}) => {
     const [nextEvent, setNextEvent] = useState(null);
     const [nextRace, setNextRace] = useState();
     const [timeLeft, setTimeLeft] = useState("");
@@ -94,7 +94,7 @@ export function CountdownToNextEvent({races}) {
             const minutes = String(Math.floor((distance / (1000 * 60)) % 60)).padStart(2, '0');
             const seconds = String(Math.floor((distance / 1000) % 60)).padStart(2, '0');
 
-            setTimeLeft(`${days}: ${hours}: ${minutes}: ${seconds}s`);
+            setTimeLeft(`${days}d: ${hours}h: ${minutes}m: ${seconds}s`);
 
         }, 1000);
 
@@ -104,7 +104,7 @@ export function CountdownToNextEvent({races}) {
     if (!nextEvent) return <p className="text-gray-500 text-center"></p>;
     const race = races.find(race => race.raceName === nextRace);
     return (
-        <div className="my-12 rounded-2xl bg-cover bg-center h-70 relative border-2" 
+        <div className="my-12 rounded-2xl bg-cover bg-center h-70 relative border-2"
             style={{ backgroundImage: `url(${getCircuitImage(race.Circuit.circuitId)})` }}>
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/25 rounded-2xl"></div>
             <div className="absolute inset-0 m-8">
@@ -131,3 +131,5 @@ export function CountdownToNextEvent({races}) {
         </div>
     );
 }
+
+export default UpcomingRace
