@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const SideBar = () => {
     return (
-        <aside className="w-64 min-h-screen fixed top-0 text-white p-6 bg-blue-950">
+        <aside className="w-64 min-h-screen fixed top-0 text-white p-6 bg-red-600">
             <div className="flex items-center mb-10">
                 <h1 className="text-2xl font-bold">F1 Dashboard</h1>
             </div>
