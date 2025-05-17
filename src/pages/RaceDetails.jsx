@@ -12,10 +12,6 @@ const RaceDetails = () => {
   const [events, setEvents] = useState();
   const [expanded, setExpanded] = useState(false);
 
-  const circuits = Object.keys(circuitData).map(key => ({
-    id: key,
-    ...circuitData[key]
-  }));
 
   useEffect(() => {
     axios.get(`${ERGASTAPI}current/${round}/races/`)
@@ -82,13 +78,13 @@ const RaceDetails = () => {
     setEvents(eventSessions)
   }, [race]);
 
-  console.log(events);
+  // console.log(events);
 
   return (
     <main className="ml-64 w-full">
-      <div className="h-100 bg-cover bg-center relative"
+      <div className="h-100 bg-cover bg-center relative m-4 rounded-xl"
         style={{ backgroundImage: `url(${getCircuitImage(race?.Circuit.circuitId)})` }}>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/30 rounded-xl"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center">
           <div className="text-5xl text-white font-extrabold mb-2">{race?.Circuit.Location.country}</div>
           <div className="text-5xl text-white font-extrabold mb-2">{race?.season}</div>
@@ -101,8 +97,8 @@ const RaceDetails = () => {
             month: 'short'
           })}
           </div>
-          <div className="h-25"></div>
-          <div className="text-3xl text-white font-bold">{race?.Circuit.circuitName}</div>
+          {/* <div className="h-25"></div>
+          <div className="text-3xl text-white font-bold">{race?.Circuit.circuitName}</div> */}
         </div>
       </div>
       <div className="m-8">
@@ -166,14 +162,10 @@ const RaceDetails = () => {
                     {circuitData[race?.Circuit.circuitId]?.circuitLength} km
                   </div>
                   <div>
-                    <div className={`text-gray-700 transition-all ${expanded ? "" : "line-clamp-2"}`}>
-                      {circuitData[race?.Circuit.circuitId]?.description}
-                    </div>
-                    <button
-                      onClick={() => setExpanded(!expanded)}
-                      className="text-red-600 cursor-pointer focus:outline-none"
-                    >
-                      {expanded ? "see less" : "see more"}
+                    <button onClick={() => setExpanded(!expanded)} className="text-red-600 cursor-pointer focus:outline-none">
+                      <div className={`text-left text-gray-700 transition-all ${expanded ? "" : "line-clamp-2"}`}>
+                        {circuitData[race?.Circuit.circuitId]?.description}
+                      </div>
                     </button>
                   </div>
                 </div>

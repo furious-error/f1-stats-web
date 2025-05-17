@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { getCircuitImage } from "../utils/helper";
 import {getFlag} from "../utils/CountryFlags"
+import { useNavigate } from "react-router-dom";
 
 const UpcomingRace = ({races}) => {
     const [nextEvent, setNextEvent] = useState(null);
     const [nextRace, setNextRace] = useState();
     const [timeLeft, setTimeLeft] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const now = new Date();
@@ -103,6 +105,11 @@ const UpcomingRace = ({races}) => {
 
     if (!nextEvent) return <p className="text-gray-500 text-center"></p>;
     const race = races.find(race => race.raceName === nextRace);
+
+    const seeDetails = () => {
+        navigate(`/race/${race.round}`);
+    }
+
     return (
         <div className="my-12 rounded-2xl bg-cover bg-center h-70 relative border-2"
             style={{ backgroundImage: `url(${getCircuitImage(race.Circuit.circuitId)})` }}>
@@ -118,12 +125,20 @@ const UpcomingRace = ({races}) => {
                             <div className="text-gray-100 font-extrabold text-4xl text-wrap">
                                 {race.raceName}
                             </div>
+                            <button onClick={seeDetails} className="text-white text-sm font-medium cursor-pointer">
+                                See Details ➜
+                            </button>
                         </div>
                         <div className="max-w-[60%]">
-                            <div className="border-2 border-white rounded-2xl bg-blue-950 p-6">
-                                <div className="text-base font-sans text-white font-semibold">Time Until {nextEvent.label}</div>
-                                <div className="text-4xl font-sans text-white font-bold"> {timeLeft} </div>
+                            <div className="rounded-2xl p-6 border border-white/20 bg-white/10 backdrop-blur-md shadow-lg hover:bg-white/20">
+                                <div className="text-base font-sans text-white font-semibold">
+                                    Time Until {nextEvent.label}
+                                </div>
+                                <div className="text-4xl font-sans text-white font-bold">
+                                    {timeLeft}
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

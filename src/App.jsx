@@ -10,7 +10,7 @@ import RaceDetails from './pages/RaceDetails';
 function App() {
   return (
     <>
-      <div className="flex min-h-screen bg-gray-50">
+      <div className="flex bg-gray-50">
         <SideBar />
         <Routes>
           <Route path="/" element={<SchedulePage />} />

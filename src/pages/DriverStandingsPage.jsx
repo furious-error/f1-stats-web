@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ERGASTAPI } from "../constants";
+import teamData from "../constants/teamData";
 
 
 const DriverStandingsPage = () => {
@@ -21,18 +22,25 @@ const DriverStandingsPage = () => {
     return (
         <main className="ml-64 px-12 py-8 w-full">
             <div className="text-3xl font-bold mb-10">Driver Standings</div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-12 font-semibold border-b-2 pb-2 mb-4 border-red-600">
+                <div className="col-span-1 text-center">Pos</div>
+                <div className="col-span-6">Driver</div>
+                <div className="col-span-3">Team</div>
+                <div className="col-span-2 text-center">Points</div>
+            </div>
+            <div className="flex flex-col space-y-4">
                 {driverStandings.map(driver => (
-                    <li key={driver.Driver.driverId} className="bg-white p-4 rounded-xl shadow flex items-center justify-between">
-                        <div>
-                            <h2 className="text-xl font-bold">{driver.position}. {driver.Driver.givenName} {driver.Driver.familyName}</h2>
-                            <p className="text-gray-600">{driver.Constructors[0].name} - {driver.Driver.nationality}</p>
+                    <div key={driver.Driver.driverId}
+                        className="grid grid-cols-12 items-center bg-white rounded-lg shadow-sm py-4">
+                        <div className="col-span-1 text-center font-medium">{driver.position}</div>
+                        <div className="col-span-6 flex items-center space-x-3">
+                            <div className="h-4 w-1" style={{ backgroundColor: teamData[driver.Constructors[0].constructorId]?.teamColor || '#000' }}></div>
+                            <img src={teamData[driver.Constructors[0].constructorId]?.teamLogo} alt="logo" className="w-10" />
+                            <div className="text-lg font-bold">{driver.Driver.givenName} {driver.Driver.familyName}</div>
                         </div>
-                        <div className="text-right">
-                            <p className="text-2xl font-bold">{driver.points} pts</p>
-                            <p className="text-sm text-gray-500">{driver.wins} wins</p>
-                        </div>
-                    </li>
+                        <div className="col-span-3 font-semibold">{driver.Constructors[0].name}</div>
+                        <div className="col-span-2 text-center font-semibold">{driver.points}</div>
+                    </div>
                 ))}
             </div>
         </main>
