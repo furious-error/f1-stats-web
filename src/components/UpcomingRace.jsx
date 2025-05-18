@@ -110,15 +110,34 @@ const UpcomingRace = ({races}) => {
         navigate(`/race/${race.round}`);
     }
 
+    const parseTimeLeft = (str) => {
+        const match = str.match(/(\d+)d: (\d+)h: (\d+)m: (\d+)s/);
+        if (!match) return { days: "00", hours: "00", minutes: "00", seconds: "00" };
+        const [, days, hours, minutes, seconds] = match;
+        return { days, hours, minutes, seconds };
+    };
+
+    const renderSegment = (unit, timeLeftStr) => {
+        const { days, hours, minutes, seconds } = parseTimeLeft(timeLeftStr);
+        const valueMap = { days, hours, minutes, seconds };
+        return (
+            <div className="flex flex-col items-center">
+                <div className="text-white text-4xl font-extrabold">{valueMap[unit]}</div>
+                <div className="text-gray-300 text-xs mt-1 uppercase tracking-wider">{unit}</div>
+            </div>
+        );
+    };
+    
+
     return (
         <div className="my-12 rounded-2xl bg-cover bg-center h-70 relative border-2"
             style={{ backgroundImage: `url(${getCircuitImage(race.Circuit.circuitId)})` }}>
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/25 rounded-2xl"></div>
             <div className="absolute inset-0 m-8">
-                <div className="text-white font-bold text-base"> UP NEXT - ROUND {race.round}</div>
-                <div className="flex flex-col mt-10">
-                    <div className="flex max-w-full justify-between">
+                <div className="flex flex-col">
+                    <div className="flex max-w-full justify-between items-center">
                         <div className="max-w-[40%]">
+                            <div className="text-white font-bold text-base mb-8"> UP NEXT - ROUND {race.round}</div>
                             <div className="text-gray-300 font-bold text-2xl text-wrap mb-4">
                                 {getFlag(race.Circuit.Location.country)} {race.Circuit.Location.country}
                             </div>
@@ -132,11 +151,18 @@ const UpcomingRace = ({races}) => {
                         <div className="max-w-[60%]">
                             <div className="rounded-2xl p-6 border border-white/20 bg-white/10 backdrop-blur-md shadow-lg hover:bg-white/20">
                                 <div className="text-base font-sans text-white font-semibold">
-                                    Time Until {nextEvent.label}
+                                    <span className="font-bold text-xl">{nextEvent.label}</span> starts in
                                 </div>
-                                <div className="text-4xl font-sans text-white font-bold">
-                                    {timeLeft}
+                                <div className="flex items-center justify-center space-x-4 mt-4">
+                                    {renderSegment("days", timeLeft)}
+                                    <div className="text-red-600 text-4xl font-bold">:</div>
+                                    {renderSegment("hours", timeLeft)}
+                                    <div className="text-red-600 text-4xl font-bold">:</div>
+                                    {renderSegment("minutes", timeLeft)}
+                                    <div className="text-red-600 text-4xl font-bold">:</div>
+                                    {renderSegment("seconds", timeLeft)}
                                 </div>
+
                             </div>
 
                         </div>
