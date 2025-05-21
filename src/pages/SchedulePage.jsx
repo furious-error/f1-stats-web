@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import UpcomingRace from "../components/UpcomingRace";
-import { ERGASTAPI } from "../constants";
+import  ERGASTAPI  from "../constants/apiConst";
 import { formatDate, getCircuitImage } from '../utils/helper';
 import { getFlag } from '../utils/CountryFlags';
 

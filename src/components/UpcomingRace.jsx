@@ -17,7 +17,7 @@ const UpcomingRace = ({races}) => {
 
             if (race.FirstPractice) {
                 eventSessions.push({
-                    label: "Free Practice 1",
+                    label: "Practice 1",
                     datetime: new Date(`${race.FirstPractice.date}T${race.FirstPractice.time}`),
                     raceName,
                 });
@@ -31,7 +31,7 @@ const UpcomingRace = ({races}) => {
                 });
             } else if (race.SecondPractice) {
                 eventSessions.push({
-                    label: "Free Practice 2",
+                    label: "Practice 2",
                     datetime: new Date(`${race.SecondPractice.date}T${race.SecondPractice.time}`),
                     raceName,
                 });
@@ -45,7 +45,7 @@ const UpcomingRace = ({races}) => {
                 });
             } else if (race.ThirdPractice) {
                 eventSessions.push({
-                    label: "Free Practice 3",
+                    label: "Practice 3",
                     datetime: new Date(`${race.ThirdPractice.date}T${race.ThirdPractice.time}`),
                     raceName,
                 });

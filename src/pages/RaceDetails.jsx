@@ -1,17 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ERGASTAPI } from '../constants';
+import  ERGASTAPI  from '../constants/apiConst';
 import { getCircuitImage, getCircuitTrackMap } from '../utils/helper';
 import circuitData from '../constants/circuitData'
 import ImageDialog from '../components/ImageDialog';
+import { useNavigate } from 'react-router-dom';
 
 const RaceDetails = () => {
   const { round } = useParams();
   const [race, setRace] = useState();
   const [events, setEvents] = useState();
   const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
 
+  
 
   useEffect(() => {
     axios.get(`${ERGASTAPI}current/${round}/races/`)
@@ -29,7 +32,7 @@ const RaceDetails = () => {
     const eventSessions = [];
     if (race?.FirstPractice) {
       eventSessions.push({
-        label: "Free Practice 1",
+        label: "Practice 1",
         datetime: new Date(`${race?.FirstPractice.date}T${race?.FirstPractice.time}`),
 
       });
@@ -43,7 +46,7 @@ const RaceDetails = () => {
       });
     } else if (race?.SecondPractice) {
       eventSessions.push({
-        label: "Free Practice 2",
+        label: "Practice 2",
         datetime: new Date(`${race?.SecondPractice.date}T${race?.SecondPractice.time}`),
 
       });
@@ -57,7 +60,7 @@ const RaceDetails = () => {
       });
     } else if (race?.ThirdPractice) {
       eventSessions.push({
-        label: "Free Practice 3",
+        label: "Practice 3",
         datetime: new Date(`${race?.ThirdPractice.date}T${race?.ThirdPractice.time}`),
 
       });
@@ -77,6 +80,10 @@ const RaceDetails = () => {
     });
     setEvents(eventSessions)
   }, [race]);
+
+  const seeResult = (session) => {
+    navigate(`/race/${race?.raceName}/result/${session}`);
+  };
 
   // console.log(events);
 
@@ -127,6 +134,7 @@ const RaceDetails = () => {
                           hour12: true,
                         })}</div>
                     </div>
+                    <button onClick={() => seeResult(session.label)} className="ml-auto">Results {'>'}</button>
                   </div>
                 </div>
               ))}

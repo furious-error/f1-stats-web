@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ERGASTAPI } from "../constants";
+import  ERGASTAPI  from "../constants/apiConst";
 import teamData from "../constants/teamData";
 
 
