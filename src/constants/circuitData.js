@@ -270,7 +270,7 @@ const circuitData = {
         description: "Marina Bay Street Circuit, Singapore’s night race, is a physically demanding track with 23 corners and high humidity. Its bumpy surface and close walls punish mistakes. Overtaking is tough, but the sling-shot into Turn 7 offers chances."
     },
     americas: {
-        track: "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Mexico",
+        track: "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/USA",
         trackMap: "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_1320/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/USA_Circuit",
         layout: "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/USA%20carbon",
         trackRecord: {

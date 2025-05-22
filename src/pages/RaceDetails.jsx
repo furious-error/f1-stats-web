@@ -96,7 +96,7 @@ const RaceDetails = () => {
           <div className="text-5xl text-white font-extrabold mb-2">{race?.Circuit.Location.country}</div>
           <div className="text-5xl text-white font-extrabold mb-2">{race?.season}</div>
           <div className="text-2xl text-white font-bold">
-            {events?.find(event => event.label === "Free Practice 1")?.datetime.toLocaleDateString('en-GB', {
+            {events?.find(event => event.label === "Practice 1")?.datetime.toLocaleDateString('en-GB', {
             day: '2-digit',
             month: 'short'
             })} - {events?.find(event => event.label === "Race")?.datetime.toLocaleDateString('en-GB', {
@@ -134,7 +134,9 @@ const RaceDetails = () => {
                           hour12: true,
                         })}</div>
                     </div>
-                    <button onClick={() => seeResult(session.label)} className="ml-auto">Results {'>'}</button>
+                    {new Date().getTime() - new Date(session.datetime) > 2*60*60*1000 ? <button onClick={() => seeResult(session.label)} className="ml-auto cursor-pointer">See Results</button> : <div></div>
+                    
+                    }
                   </div>
                 </div>
               ))}

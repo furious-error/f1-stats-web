@@ -1,11 +1,11 @@
 const teamData = {
     mclaren: {
         teamLogo: "https://media.formula1.com/content/dam/fom-website/teams/2025/mclaren-logo.png",
-        teamColor: "#F58020",
+        teamColor: "#FF8000",
     },
     mercedes: {
         teamLogo: "https://media.formula1.com/content/dam/fom-website/teams/2025/mercedes-logo.png",
-        teamColor: "#6CD3BF",
+        teamColor: "#27F4D2",
     },
     red_bull: {
         teamLogo: "https://media.formula1.com/content/dam/fom-website/teams/2025/red-bull-racing-logo.png",
@@ -13,11 +13,11 @@ const teamData = {
     },
     ferrari: {
         teamLogo: "https://media.formula1.com/content/dam/fom-website/teams/2025/ferrari-logo.png",
-        teamColor: "#F91536",
+        teamColor: "#E80020",
     },
     williams: {
         teamLogo: "https://media.formula1.com/content/dam/fom-website/teams/2025/williams-logo.png",
-        teamColor: "#37BEDD",
+        teamColor: "#64C4FF",
     },
     haas: {
         teamLogo: "https://media.formula1.com/content/dam/fom-website/teams/2025/haas-logo.png",

@@ -130,25 +130,23 @@ const UpcomingRace = ({races}) => {
     
 
     return (
-        <div className="my-12 rounded-2xl bg-cover bg-center h-70 relative border-2"
+        <div className="mt-4 mb-12 rounded-2xl bg-cover bg-center h-80 relative border-2"
             style={{ backgroundImage: `url(${getCircuitImage(race.Circuit.circuitId)})` }}>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/25 rounded-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/35 rounded-2xl"></div>
             <div className="absolute inset-0 m-8">
-                <div className="flex flex-col">
-                    <div className="flex max-w-full justify-between items-center">
-                        <div className="max-w-[40%]">
-                            <div className="text-white font-bold text-base mb-8"> UP NEXT - ROUND {race.round}</div>
-                            <div className="text-gray-300 font-bold text-2xl text-wrap mb-4">
+                <div className="absolute inset-0 flex">
+                    <div className="flex w-full justify-between items-center p-6 rounded-xl">
+                        <div className="w-[60%]">
+                            <div className="text-white font-bold text-base mb-4">UP NEXT - ROUND {race.round}</div>
+                            <div className="text-gray-300 font-bold text-2xl mb-2 ">
                                 {getFlag(race.Circuit.Location.country)} {race.Circuit.Location.country}
                             </div>
-                            <div className="text-gray-100 font-extrabold text-4xl text-wrap">
-                                {race.raceName}
-                            </div>
-                            <button onClick={seeDetails} className="text-white text-sm font-medium cursor-pointer">
+                            <div className="text-gray-100 font-extrabold text-4xl">{race.raceName}</div>
+                            <button onClick={seeDetails} className="mt-4 text-white text-sm font-medium cursor-pointer">
                                 See Details ➜
                             </button>
                         </div>
-                        <div className="max-w-[60%]">
+                        <div className="w-[40%]">
                             <div className="rounded-2xl p-6 border border-white/20 bg-white/10 backdrop-blur-md shadow-lg hover:bg-white/20">
                                 <div className="text-base font-sans text-white font-semibold">
                                     <span className="font-bold text-xl">{nextEvent.label}</span> starts in
@@ -162,12 +160,11 @@ const UpcomingRace = ({races}) => {
                                     <div className="text-red-600 text-4xl font-bold">:</div>
                                     {renderSegment("seconds", timeLeft)}
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
 import React from "react";
+import { formatTime } from "../utils/helper";
 
 const compoundColor = {
     SOFT: 'text-red-600',
@@ -6,14 +7,14 @@ const compoundColor = {
     HARD: 'text-white bg-gray-700',
 };
 
-function formatTime(timeStr) {
-    if (!timeStr) return '—';
-    const parts = timeStr.split(' ')[2];
-    const [hours, minutes, seconds] = parts.split(':');
-    const [sec, ms] = seconds.split('.');
-    const totalMinutes = parseInt(hours) * 60 + parseInt(minutes);
-    return `${String(totalMinutes).padStart(2, '0')}:${sec}.${ms.substring(0, 3)}`;
-}
+// function formatTime(timeStr) {
+//     if (!timeStr) return '—';
+//     const parts = timeStr.split(' ')[2];
+//     const [hours, minutes, seconds] = parts.split(':');
+//     const [sec, ms] = seconds.split('.');
+//     const totalMinutes = parseInt(hours) * 60 + parseInt(minutes);
+//     return `${String(totalMinutes).padStart(2, '0')}:${sec}.${ms.substring(0, 3)}`;
+// }
   
 
 function LapTable({ laps }) {
