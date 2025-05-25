@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import UpcomingRace from "../components/UpcomingRace";
 import  ERGASTAPI  from "../constants/apiConst";
-import { formatDate, getCircuitImage } from '../utils/helper';
+import { formatDate, getCircuitImage, getCircuitLayout } from '../utils/helper';
 import { getFlag } from '../utils/CountryFlags';
+import { circuitData } from "../constants";
 
 const SchedulePage = () => {
     const [races, setRaces] = useState([]);
@@ -31,29 +32,30 @@ const SchedulePage = () => {
             <div className="text-3xl font-bold mb-8">Race Schedule</div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {races.map(race => (
-                    // <div key={race.round}><RaceCard race={race} /></div>
-                    <div key={race.round} className="bg-white rounded-2xl shadow-md p-4 hover:shadow-lg transition duration-300 transform hover:-translate-y-1">
-                        <img src={getCircuitImage(race.Circuit.circuitId)} alt={race.Circuit.circuitName} className="rounded-xl mb-4 w-full h-40 object-cover" />
-                        <div className="flex items-center mb-2">
-                            <span className="text-2xl/4 mr-2">{getFlag(race.Circuit.Location.country)}</span>
-                            <h2 className="text-xl font-semibold">{race.raceName}</h2>
+                    <div key={race.round} className="bg-white rounded-2xl shadow-md p-4 hover:shadow-lg transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
+                        <div className="text-sm font-bold text-red-600">ROUND {race.round}</div>
+                        <div className="text-base flex flex-row items-center font-medium mt-1 mb-2"><span className="text-2xl/4">{getFlag(race.Circuit.Location.country)}</span> &nbsp; {race.Circuit.Location.locality}, {race.Circuit.Location.country}</div>
+                        <div className="text-lg font-bold">
+                            {new Date(race.FirstPractice.date).toLocaleDateString('en-GB', {
+                                day: '2-digit',
+                                month: 'short'
+                            })
+                            } - {new Date(race.date).toLocaleDateString('en-GB', {
+                                day: '2-digit',
+                                month: 'short'
+                            })}
                         </div>
-                        <p className="text-gray-600 mb-1">
-                            <span className="font-medium">Circuit:</span> {race.Circuit.circuitName}
-                        </p>
-                        <p className="text-gray-600 mb-1">
-                            <span className="font-medium">Location:</span> {race.Circuit.Location.locality}, {race.Circuit.Location.country}
-                        </p>
-                        <p className="text-gray-600 mb-3">
-                            <span className="font-medium">Date:</span> {formatDate(race.date)}
-                        </p>
-
-
+                        <div className="text-xl font-semibold text-wrap">
+                            {circuitData[race.Circuit.circuitId].officialName || race.raceName} {race.season}
+                        </div>
+                        <div className="w-full">
+                            <img src={getCircuitLayout(race.Circuit.circuitId)} alt={race.Circuit.circuitName} className="rounded-xl mx-auto object-fit my-2" height={200} width={200} />
+                        </div>
                         <button
-                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                            onClick={() => handleClick(race.round)} // Example ID
+                            className="text-sm font-medium cursor-pointer text-left"
+                            onClick={() => handleClick(race.round)}
                         >
-                            Go to Details Page
+                            See Details
                         </button>
                     </div>
                 ))}
