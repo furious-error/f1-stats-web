@@ -11,9 +11,10 @@ function RaceResultPage() {
 
     // console.log(round);
     // console.log(session);
-
+    const API = "https://f1-backend-h0qi.onrender.com"
+    // const API = "http://127.0.0.1:5001"
     useEffect(() => {
-        axios.get(`https://f1-backend-h0qi.onrender.com/f1data`, {
+        axios.get(`${API}/f1data`, {
             params:{
                 "year": new Date().getFullYear(),
                 "gp": round,

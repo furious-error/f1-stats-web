@@ -10,7 +10,7 @@ const SideBar = () => {
             <nav>
                 <ul>
                     <li>
-                        <NavLink to="/" className="block py-2 px-3 rounded-md hover:bg-sidebar-hover hover:text-white transition-colors duration-200 text-white/80">Schedule</NavLink>
+                        <NavLink to="/f1-stats-web" className="block py-2 px-3 rounded-md hover:bg-sidebar-hover hover:text-white transition-colors duration-200 text-white/80">Schedule</NavLink>
                     </li>
                     <li>
                         <NavLink to="/constructor-standing" className="block py-2 px-3 rounded-md hover:bg-sidebar-hover hover:text-white transition-colors duration-200 text-white/80">Constructor Standing</NavLink>
