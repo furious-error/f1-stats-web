@@ -13,7 +13,7 @@ function RaceResultPage() {
     // console.log(session);
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:5001/f1data`, {
+        axios.get(`https://f1-backend-h0qi.onrender.com/f1data`, {
             params:{
                 "year": new Date().getFullYear(),
                 "gp": round,
