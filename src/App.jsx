@@ -14,7 +14,7 @@ function App() {
       <div className="flex bg-gray-50">
         <SideBar />
         <Routes>
-          <Route path="/" element={<SchedulePage />} />
+          <Route path="/f1-stats-web" element={<SchedulePage />} />
           <Route path="/constructor-standing" element={<ConstructorStandingsPage />} />
           <Route path="/driver-standing" element={<DriverStandingsPage />} />
           <Route path="/race/:round" element={<RaceDetails />}/>
