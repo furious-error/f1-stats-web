@@ -109,8 +109,8 @@ const RaceDetails = () => {
         </div>
       </div>
       <div className="m-8">
-        <div className="text-4xl text-black font-bold mb-6">
-          {race?.raceName}
+        <div className="text-2xl text-black font-medium mb-6 text-wrap">
+          {circuitData[race?.Circuit.circuitId]?.officialName || race?.raceName} {race?.season}
         </div>
         <div className="flex flex-col p-6">
           <div className="flex max-w-full justify-between">
@@ -118,7 +118,7 @@ const RaceDetails = () => {
               {events?.map((session, index) => (
                 <div key={index}>
                   <div className="flex flex-row mb-4 items-center border-2 border-red-600 rounded-2xl p-4">
-                    <div className="text-2xl font-semibold">
+                    <div className="text-xl font-semibold">
                       {session.datetime.toLocaleDateString('en-GB', {
                         day: '2-digit',
                         month: 'short'
