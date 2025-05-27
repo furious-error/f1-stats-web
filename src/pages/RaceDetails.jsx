@@ -134,9 +134,9 @@ const RaceDetails = () => {
                           hour12: true,
                         })}</div>
                     </div>
-                    {new Date().getTime() - new Date(session.datetime) > 2*60*60*1000 ? <button onClick={() => seeResult(session.label)} className="ml-auto cursor-pointer">See Results</button> : <div></div>
+                    {/* {new Date().getTime() - new Date(session.datetime) > 2*60*60*1000 ? <button onClick={() => seeResult(session.label)} className="ml-auto cursor-pointer">See Results</button> : <div></div>
                     
-                    }
+                    } */}
                   </div>
                 </div>
               ))}

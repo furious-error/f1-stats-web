@@ -31,7 +31,7 @@ const QualifyingTable = ({ data }) => {
             </div>
             <div className="flex flex-col space-y-4">
                 {data.map((driver, index) => (
-                    <div key={driver.DriverId} 
+                    <div key={index} 
                         className="grid grid-cols-12 items-center bg-white rounded-lg shadow-sm py-4">
                         <div className="col-span-1 text-center font-base">{index + 1}</div>
                         <div className="col-span-5 flex items-center space-x-3">
