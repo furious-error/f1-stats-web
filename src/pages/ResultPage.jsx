@@ -11,19 +11,15 @@ function RaceResultPage() {
 
     // console.log(round);
     // console.log(session);
-    const API = "https://f1-backend-h0qi.onrender.com"
+    const year = new Date().getFullYear()
+    const gp = round
+    const API = "https://f1-stats-backend-nodejs.onrender.com/api"
     // const API = "http://127.0.0.1:5001"
     useEffect(() => {
-        axios.get(`${API}/f1data`, {
-            params:{
-                "year": new Date().getFullYear(),
-                "gp": round,
-                "session": session
-            }
-        }).then(response => {
+        axios.get(`${API}/events/${gp}/${year}/sessions/${session}`).then(response => {
                 const res = response;
-                // console.log(res.data);
-                setResult(res.data)
+                // console.log(res.data.sessionData.data);
+                setResult(res.data.sessionData.data)
             }).catch(error => {
                 console.error('Error fetching data:', error);
             });
