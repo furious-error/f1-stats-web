@@ -48,7 +48,7 @@ function RaceResultPage() {
 
   return (
     <main className="ml-64 px-12 py-8 w-full">
-        <div className="my-6 text-3xl font-bold">{round} - {session} results</div>
+        <div className="my-6 text-3xl font-bold">{round} - {session} Results</div>
         {renderResultComponent()}
     </main>
   )

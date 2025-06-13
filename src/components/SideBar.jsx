@@ -13,10 +13,13 @@ const SideBar = () => {
                         <NavLink to="/f1-stats-web" className="block py-2 px-3 rounded-md hover:bg-sidebar-hover hover:text-white transition-colors duration-200 text-white/80">Schedule</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/constructor-standing" className="block py-2 px-3 rounded-md hover:bg-sidebar-hover hover:text-white transition-colors duration-200 text-white/80">Constructor Standing</NavLink>
+                        <NavLink to="/f1-stats-web/constructor-standing" className="block py-2 px-3 rounded-md hover:bg-sidebar-hover hover:text-white transition-colors duration-200 text-white/80">Constructor Standing</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/driver-standing" className="block py-2 px-3 rounded-md hover:bg-sidebar-hover hover:text-white transition-colors duration-200 text-white/80">Driver Standing</NavLink>
+                        <NavLink to="f1-stats-web/driver-standing" className="block py-2 px-3 rounded-md hover:bg-sidebar-hover hover:text-white transition-colors duration-200 text-white/80">Driver Standing</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="f1-stats-web/analysis" className="block py-2 px-3 rounded-md hover:bg-sidebar-hover hover:text-white transition-colors duration-200 text-white/80">Analysis</NavLink>
                     </li>
                 </ul>
             </nav>

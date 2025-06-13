@@ -11,8 +11,8 @@ const SchedulePage = () => {
     const [races, setRaces] = useState([]);
     const navigate = useNavigate();
 
-    const handleClick = (id) => {
-        navigate(`/race/${id}`);
+    const handleClick = (id, raceName) => {
+        navigate(`/f1-stats-web/${id}/${raceName}`);
     };
 
     useEffect(() => {
@@ -53,7 +53,7 @@ const SchedulePage = () => {
                         </div>
                         <button
                             className="text-sm font-medium cursor-pointer text-left"
-                            onClick={() => handleClick(race.round)}
+                            onClick={() => handleClick(race.round, race.raceName)}
                         >
                             See Details
                         </button>

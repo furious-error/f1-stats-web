@@ -107,7 +107,7 @@ const UpcomingRace = ({races}) => {
     const race = races.find(race => race.raceName === nextRace);
 
     const seeDetails = () => {
-        navigate(`/race/${race.round}`);
+        navigate(`/f1-stats-web/${race.round}/${race.raceName}`);
     }
 
     const parseTimeLeft = (str) => {

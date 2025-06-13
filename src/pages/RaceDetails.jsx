@@ -82,7 +82,7 @@ const RaceDetails = () => {
   }, [race]);
 
   const seeResult = (session) => {
-    navigate(`/race/${race?.raceName}/result/${session}`);
+    navigate(`/f1-stats-web/${race?.raceName}/result/${session}`);
   };
 
   // console.log(events);
