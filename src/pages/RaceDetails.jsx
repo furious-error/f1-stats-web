@@ -148,7 +148,7 @@ const RaceDetails = () => {
               <div className="border-2 rounded-xl p-4 border-red-600 mb-6">
                 <div className="text-base font-medium text-wrap mb-4">{race?.Circuit.circuitName}</div>
                 {/* <img src={getCircuitTrackMap(race?.Circuit.circuitId)} alt="track map"/> */}
-                <ImageDialog imageUrl={getCircuitTrackMap(race?.Circuit.circuitId)}/>
+                <ImageDialog imageUrl={getCircuitTrackMap(race?.Circuit.circuitId)} alt={"track map"} style="max-h-[95vh] w-full h-auto object-contain" bgColor={"bg-white"}/>
               </div>
               <div className="border-2 rounded-xl p-4 border-red-600">
                 <div className="space-y-2">

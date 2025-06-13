@@ -1,7 +1,7 @@
 // ImageDialog.jsx
 import React, { useState } from 'react';
 
-const ImageDialog = ({ imageUrl, altText }) => {
+const ImageDialog = ({ imageUrl, altText, style, bgColor }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -19,10 +19,10 @@ const ImageDialog = ({ imageUrl, altText }) => {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
-          <div className="bg-white p-4 rounded shadow-lg relative max-w-3xl w-full">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 overflow-auto p-4">
+          <div className={`rounded shadow-lg relative w-full ${bgColor}`}>
             <button
-              className="absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
+              className="absolute top-2 right-2 text-red-600 hover:text-red-800 cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               ✕
@@ -30,7 +30,7 @@ const ImageDialog = ({ imageUrl, altText }) => {
             <img
               src={imageUrl}
               alt={altText}
-              className="w-full h-auto object-contain"
+              className={style}
             />
           </div>
         </div>
