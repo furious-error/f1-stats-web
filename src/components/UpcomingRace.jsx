@@ -130,9 +130,9 @@ const UpcomingRace = ({races}) => {
     
 
     return (
-        <div className="mt-4 mb-12 rounded-2xl bg-cover bg-center h-80 relative border-2"
+        <div className="mt-4 mb-12 rounded-2xl bg-cover bg-center h-80 relative"
             style={{ backgroundImage: `url(${getCircuitImage(race.Circuit.circuitId)})` }}>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/35 rounded-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-black/35 rounded-2xl"></div>
             <div className="absolute inset-0 m-8">
                 <div className="absolute inset-0 flex">
                     <div className="flex w-full justify-between items-center p-6 rounded-xl">

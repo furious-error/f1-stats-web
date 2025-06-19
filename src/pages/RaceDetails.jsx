@@ -91,7 +91,7 @@ const RaceDetails = () => {
     <main className="ml-64 w-full">
       <div className="h-100 bg-cover bg-center relative m-4 rounded-xl"
         style={{ backgroundImage: `url(${getCircuitImage(race?.Circuit.circuitId)})` }}>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/30 rounded-xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/25 rounded-xl"></div>
         <div className="absolute inset-0 flex flex-col justify-center items-center">
           <div className="text-5xl text-white font-extrabold mb-2">{race?.Circuit.Location.country}</div>
           <div className="text-5xl text-white font-extrabold mb-2">{race?.season}</div>
