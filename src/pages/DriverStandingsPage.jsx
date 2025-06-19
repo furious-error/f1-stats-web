@@ -11,7 +11,7 @@ const DriverStandingsPage = () => {
         axios.get(`${ERGASTAPI}current/driverstandings/`)
             .then(response => {
                 const driverStandingData = response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-                console.log(driverStandingData);
+                // console.log(driverStandingData);
                 setDriverStandings(driverStandingData);
             })
             .catch(error => {
