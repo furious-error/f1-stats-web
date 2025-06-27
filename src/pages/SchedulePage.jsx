@@ -36,11 +36,11 @@ const SchedulePage = () => {
                         <div className="text-sm font-bold text-red-600">ROUND {race.round}</div>
                         <div className="text-base flex flex-row items-center font-medium mt-1 mb-2"><span className="text-2xl/4">{getFlag(race.Circuit.Location.country)}</span> &nbsp; {race.Circuit.Location.locality}, {race.Circuit.Location.country}</div>
                         <div className="text-lg font-bold">
-                            {new Date(race.FirstPractice.date).toLocaleDateString('en-GB', {
+                            {new Date(race.FirstPractice.date + " " + race.FirstPractice.time).toLocaleDateString('en-GB', {
                                 day: '2-digit',
                                 month: 'short'
                             })
-                            } - {new Date(race.date).toLocaleDateString('en-GB', {
+                            } - {new Date(race.date + " " + race.time).toLocaleDateString('en-GB', {
                                 day: '2-digit',
                                 month: 'short'
                             })}

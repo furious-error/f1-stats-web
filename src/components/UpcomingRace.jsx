@@ -137,9 +137,19 @@ const UpcomingRace = ({races}) => {
                 <div className="absolute inset-0 flex">
                     <div className="flex w-full justify-between items-center p-6 rounded-xl">
                         <div className="w-[60%]">
-                            <div className="text-white font-bold text-base mb-4">UP NEXT - ROUND {race.round}</div>
+                            <div className="text-white font-bold text-base mb-2">UP NEXT - ROUND {race.round}</div>
                             <div className="text-gray-300 font-bold text-2xl mb-2 ">
                                 {getFlag(race.Circuit.Location.country)} {race.Circuit.Location.country}
+                            </div>
+                            <div className="text-xl text-white font-bold mb-2">
+                                {new Date(race.FirstPractice.date + " " + race.FirstPractice.time).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short'
+                                })
+                                } - {new Date(race.date + " " + race.time).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short'
+                                })}
                             </div>
                             <div className="text-gray-100 font-extrabold text-4xl">{race.raceName}</div>
                             <button onClick={seeDetails} className="mt-4 text-white text-sm font-medium cursor-pointer">
