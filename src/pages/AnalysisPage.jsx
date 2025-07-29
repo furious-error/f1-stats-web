@@ -18,7 +18,7 @@ function AnalysisPage() {
     "Max Driver Speeds during Race": "driver_max_speeds_race",
     "Min Driver Speeds during Race": "driver_min_speeds_race",
     "Laptime distribution for Each Driver": "laptime_distribution_race",
-    "Lap by Lap Racepace":"lap_by_lap_racepace",
+    "Lap by Lap Racepace": "lap_by_lap_racepace",
   };
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function AnalysisPage() {
   const selectedRace = gpList.find(gp => gp.eventName === selectedGP);
 
   return (
-    <main className="ml-64 px-12 py-8 w-full">
+    <main className="px-4 md:px-12 py-8 w-full">
       <div className="my-6 text-3xl font-bold">Analysis</div>
       <div className="flex flex-col md:flex-row">
         <div className="flex flex-col flex-2 space-y-4 mb-6 md:mb-0 md:mr-8 w-full md:w-64">

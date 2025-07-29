@@ -1,20 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import  ERGASTAPI  from '../constants/apiConst';
-import { getCircuitImage, getCircuitTrackMap } from '../utils/helper';
-import circuitData from '../constants/circuitData'
+import { useNavigate, useParams } from 'react-router-dom';
 import ImageDialog from '../components/ImageDialog';
-import { useNavigate } from 'react-router-dom';
+import ERGASTAPI from '../constants/apiConst';
+import circuitData from '../constants/circuitData';
+import { getCircuitImage, getCircuitTrackMap } from '../utils/helper';
 
 const RaceDetails = () => {
   const { round } = useParams();
   const [race, setRace] = useState();
   const [events, setEvents] = useState();
   const [expanded, setExpanded] = useState(false);
+  const [activeTab, setActiveTab] = useState('schedule'); // Add tab state
   const navigate = useNavigate();
 
-  
+
 
   useEffect(() => {
     axios.get(`${ERGASTAPI}current/${round}/races/`)
@@ -88,31 +88,32 @@ const RaceDetails = () => {
   // console.log(events);
 
   return (
-    <main className="ml-64 w-full">
-      <div className="h-100 bg-cover bg-center relative m-4 rounded-xl"
+    <main className="md:px-2 lg:px-12 w-full">
+      <div className="h-48 md:h-100 bg-cover bg-center relative m-4 rounded-xl"
         style={{ backgroundImage: `url(${getCircuitImage(race?.Circuit.circuitId)})` }}>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/25 rounded-xl"></div>
-        <div className="absolute inset-0 flex flex-col justify-center items-center">
-          <div className="text-5xl text-white font-extrabold mb-2">{race?.Circuit.Location.country}</div>
-          <div className="text-5xl text-white font-extrabold mb-2">{race?.season}</div>
-          <div className="text-2xl text-white font-bold">
+        <div className="absolute inset-0 flex flex-col justify-center items-center px-4">
+          <div className="text-2xl md:text-5xl text-white font-extrabold mb-1 md:mb-2 text-center">{race?.Circuit.Location.country}</div>
+          <div className="text-2xl md:text-5xl text-white font-extrabold mb-1 md:mb-2 text-center">{race?.season}</div>
+          <div className="text-sm md:text-2xl text-white font-bold text-center px-2">
             {events?.find(event => event.label === "Practice 1")?.datetime.toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: 'short'
+              day: '2-digit',
+              month: 'short'
             })} - {events?.find(event => event.label === "Race")?.datetime.toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: 'short'
-          })}
+              day: '2-digit',
+              month: 'short'
+            })}
           </div>
-          {/* <div className="h-25"></div>
-          <div className="text-3xl text-white font-bold">{race?.Circuit.circuitName}</div> */}
         </div>
       </div>
-      <div className="m-8">
-        <div className="text-2xl text-black font-medium mb-6 text-wrap">
+
+      <div className="m-4 md:m-8">
+        <div className="text-xl md:text-2xl text-black font-medium mb-6 text-wrap">
           {circuitData[race?.Circuit.circuitId]?.officialName || race?.raceName} {race?.season}
         </div>
-        <div className="flex flex-col p-6">
+
+        {/* Desktop Layout - Preserved */}
+        <div className="hidden md:flex flex-col p-6">
           <div className="flex max-w-full justify-between">
             <div className="w-[60%] mr-6">
               {events?.map((session, index) => (
@@ -134,8 +135,9 @@ const RaceDetails = () => {
                           hour12: true,
                         })}</div>
                     </div>
-                    {new Date().getTime() - new Date(session.datetime) > 2*60*60*1000 ? <button onClick={() => seeResult(session.label)} className="ml-auto cursor-pointer">See Results</button> : <div></div>
-                    
+                    {new Date().getTime() - new Date(session.datetime) > 2 * 60 * 60 * 1000 ?
+                      <button onClick={() => seeResult(session.label)} className="ml-auto cursor-pointer">See Results</button> :
+                      <div></div>
                     }
                   </div>
                 </div>
@@ -147,8 +149,7 @@ const RaceDetails = () => {
             <div className="w-[40%]">
               <div className="border-2 rounded-xl p-4 border-red-600 mb-6">
                 <div className="text-base font-medium text-wrap mb-4">{race?.Circuit.circuitName}</div>
-                {/* <img src={getCircuitTrackMap(race?.Circuit.circuitId)} alt="track map"/> */}
-                <ImageDialog imageUrl={getCircuitTrackMap(race?.Circuit.circuitId)} alt={"track map"} style="max-h-[95vh] w-full h-auto object-contain" bgColor={"bg-white"}/>
+                <ImageDialog imageUrl={getCircuitTrackMap(race?.Circuit.circuitId)} alt={"track map"} style="max-h-[95vh] w-full h-auto object-contain" bgColor={"bg-white"} />
               </div>
               <div className="border-2 rounded-xl p-4 border-red-600">
                 <div className="space-y-2">
@@ -182,6 +183,111 @@ const RaceDetails = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Mobile Layout - Tabbed Interface */}
+        <div className="md:hidden">
+          {/* Tab Navigation */}
+          <div className="flex border-b border-gray-200 mb-6">
+            <button
+              onClick={() => setActiveTab('schedule')}
+              className={`flex-1 py-3 px-4 text-center font-medium rounded-t-lg transition-colors ${activeTab === 'schedule'
+                  ? 'text-red-600 border-b-2 border-red-600 bg-red-50'
+                  : 'text-gray-500 hover:text-gray-700'
+                }`}
+            >
+              Schedule
+            </button>
+            <button
+              onClick={() => setActiveTab('circuit')}
+              className={`flex-1 py-3 px-4 text-center font-medium rounded-t-lg transition-colors ${activeTab === 'circuit'
+                  ? 'text-red-600 border-b-2 border-red-600 bg-red-50'
+                  : 'text-gray-500 hover:text-gray-700'
+                }`}
+            >
+              Circuit Info
+            </button>
+          </div>
+
+          {/* Tab Content */}
+          {activeTab === 'schedule' && (
+            <div className="p-4">
+              {events?.map((session, index) => (
+                <div key={index}>
+                  <div className="flex flex-col mb-4 border-2 border-red-600 rounded-2xl p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="text-lg font-bold">{session.label}</div>
+                      <div className="text-sm font-semibold text-red-600">
+                        {session.datetime.toLocaleDateString('en-GB', {
+                          day: '2-digit',
+                          month: 'short'
+                        })}
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-base font-semibold text-gray-500">
+                        {session.datetime.toLocaleTimeString([], {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          hour12: true,
+                        })}
+                      </div>
+                      {new Date().getTime() - new Date(session.datetime) > 2 * 60 * 60 * 1000 && (
+                        <button
+                          onClick={() => seeResult(session.label)}
+                          className="text-red-600 text-sm font-medium cursor-pointer bg-red-50 px-3 py-1 rounded-lg hover:bg-red-100 transition-colors"
+                        >
+                          See Results
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div className="text-sm font-medium mt-4 text-gray-600 text-center">
+                Note: All times are shown in your local time zone ({Intl.DateTimeFormat().resolvedOptions().timeZone})
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'circuit' && (
+            <div className="p-4 space-y-4">
+              <div className="border-2 rounded-xl p-4 border-red-600">
+                <div className="text-lg font-medium text-wrap mb-4">{race?.Circuit.circuitName}</div>
+                <ImageDialog imageUrl={getCircuitTrackMap(race?.Circuit.circuitId)} alt={"track map"} style="max-h-[95vh] w-full h-auto object-contain" bgColor={"bg-white"} />
+              </div>
+              <div className="border-2 rounded-xl p-4 border-red-600">
+                <div className="space-y-3">
+                  <div className="text-sm">
+                    <strong>Track Record:</strong>{" "}
+                    {circuitData[race?.Circuit.circuitId]?.trackRecord.driver} (
+                    {circuitData[race?.Circuit.circuitId]?.trackRecord.team}) -{" "}
+                    {circuitData[race?.Circuit.circuitId]?.trackRecord.time} (
+                    {circuitData[race?.Circuit.circuitId]?.trackRecord.year})
+                  </div>
+                  <div className="text-sm">
+                    <strong>Laps:</strong>{" "}
+                    {circuitData[race?.Circuit.circuitId]?.numberOfLaps}
+                  </div>
+                  <div className="text-sm">
+                    <strong>Race Distance:</strong>{" "}
+                    {circuitData[race?.Circuit.circuitId]?.raceDistance} km
+                  </div>
+                  <div className="text-sm">
+                    <strong>Circuit Length:</strong>{" "}
+                    {circuitData[race?.Circuit.circuitId]?.circuitLength} km
+                  </div>
+                  <div>
+                    <button onClick={() => setExpanded(!expanded)} className="text-red-600 cursor-pointer focus:outline-none">
+                      <div className={`text-left text-gray-700 text-sm transition-all ${expanded ? "" : "line-clamp-3"}`}>
+                        {circuitData[race?.Circuit.circuitId]?.description}
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </main>

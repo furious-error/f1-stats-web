@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import RaceResult from "../components/RaceResult"
-import QualifyingResult from "../components/QualifyingResult"
-import PracticeResult from "../components/PracticeResult"
+import PracticeResult from "../components/PracticeResult";
+import QualifyingResult from "../components/QualifyingResult";
+import RaceResult from "../components/RaceResult";
 
 function RaceResultPage() {
-    const {round, session} = useParams()
+    const { round, session } = useParams()
     const [result, setResult] = useState();
 
     // console.log(round);
@@ -17,12 +17,12 @@ function RaceResultPage() {
     // const API = "http://127.0.0.1:5001"
     useEffect(() => {
         axios.get(`${API}/events/${gp}/${year}/sessions/${session}`).then(response => {
-                const res = response;
-                // console.log(res.data.sessionData.data);
-                setResult(res.data.sessionData.data)
-            }).catch(error => {
-                console.error('Error fetching data:', error);
-            });
+            const res = response;
+            // console.log(res.data.sessionData.data);
+            setResult(res.data.sessionData.data)
+        }).catch(error => {
+            console.error('Error fetching data:', error);
+        });
     }, [round, session]);
     // console.log(result);
 
@@ -33,7 +33,7 @@ function RaceResultPage() {
             case 'sprint':
             case 'race':
                 return <RaceResult result={result} />
-            case 'sprint qualifying':    
+            case 'sprint qualifying':
             case 'qualifying':
                 return <QualifyingResult result={result} />
             case 'practice':
@@ -46,12 +46,12 @@ function RaceResultPage() {
         }
     }
 
-  return (
-    <main className="ml-64 px-12 py-8 w-full">
-        <div className="my-6 text-3xl font-bold">{round} - {session} Results</div>
-        {renderResultComponent()}
-    </main>
-  )
+    return (
+        <main className="px-4 md:px-12 py-8 w-full">
+            <div className="my-6 text-3xl font-bold">{round} - {session} Results</div>
+            {renderResultComponent()}
+        </main>
+    )
 }
 
 export default RaceResultPage

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { getCircuitImage } from "../utils/helper";
-import {getFlag} from "../utils/CountryFlags"
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getFlag } from "../utils/CountryFlags";
+import { getCircuitImage } from "../utils/helper";
 
-const UpcomingRace = ({races}) => {
+const UpcomingRace = ({ races }) => {
     const [nextEvent, setNextEvent] = useState(null);
     const [nextRace, setNextRace] = useState();
     const [timeLeft, setTimeLeft] = useState("");
@@ -127,14 +127,15 @@ const UpcomingRace = ({races}) => {
             </div>
         );
     };
-    
+
 
     return (
-        <div className="mt-4 mb-12 rounded-2xl bg-cover bg-center h-80 relative"
+        <div className="mt-4 mb-12 rounded-2xl bg-cover bg-center h-80 md:h-80 relative"
             style={{ backgroundImage: `url(${getCircuitImage(race.Circuit.circuitId)})` }}>
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-black/35 rounded-2xl"></div>
-            <div className="absolute inset-0 m-8">
-                <div className="absolute inset-0 flex">
+            <div className="absolute inset-0 m-4 md:m-8">
+                {/* Desktop Layout */}
+                <div className="hidden md:flex absolute inset-0">
                     <div className="flex w-full justify-between items-center p-6 rounded-xl">
                         <div className="w-[60%]">
                             <div className="text-white font-bold text-base mb-2">UP NEXT - ROUND {race.round}</div>
@@ -175,6 +176,59 @@ const UpcomingRace = ({races}) => {
                     </div>
                 </div>
 
+                {/* Mobile Layout */}
+                <div className="md:hidden flex flex-col h-full p-4">
+                    <div className="flex-1 flex flex-col justify-center space-y-4">
+                        <div className="text-center">
+                            <div className="text-white font-bold text-sm mb-2">UP NEXT - ROUND {race.round}</div>
+                            <div className="text-gray-300 font-bold text-lg mb-2">
+                                {getFlag(race.Circuit.Location.country)} {race.Circuit.Location.country}
+                            </div>
+                            <div className="text-sm text-white font-bold mb-2">
+                                {new Date(race.FirstPractice.date + " " + race.FirstPractice.time).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short'
+                                })
+                                } - {new Date(race.date + " " + race.time).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short'
+                                })}
+                            </div>
+                            <div className="text-gray-100 font-extrabold text-2xl mb-3">{race.raceName}</div>
+                            <div className="text-center">
+                                <button onClick={seeDetails} className="text-white text-sm font-medium cursor-pointer  transition-colors">
+                                    See Details ➜
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="rounded-xl p-4 border border-white/20 bg-white/10 backdrop-blur-md shadow-lg">
+                            <div className="text-center text-sm font-sans text-white font-semibold mb-3">
+                                <span className="font-bold text-base">{nextEvent.label}</span> starts in
+                            </div>
+                            <div className="grid grid-cols-4 gap-2 text-center">
+                                <div className="flex flex-col items-center">
+                                    <div className="text-white text-2xl font-extrabold">{parseTimeLeft(timeLeft).days}</div>
+                                    <div className="text-white font-extrabold text-xs mt-1 uppercase tracking-wider">days</div>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <div className="text-white text-2xl font-extrabold">{parseTimeLeft(timeLeft).hours}</div>
+                                    <div className="text-white font-extrabold text-xs mt-1 uppercase tracking-wider">hours</div>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <div className="text-white text-2xl font-extrabold">{parseTimeLeft(timeLeft).minutes}</div>
+                                    <div className="text-white font-extrabold text-xs mt-1 uppercase tracking-wider">mins</div>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <div className="text-white text-2xl font-extrabold">{parseTimeLeft(timeLeft).seconds}</div>
+                                    <div className="text-white font-extrabold text-xs mt-1 uppercase tracking-wider">secs</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
             </div>
         </div>
     );

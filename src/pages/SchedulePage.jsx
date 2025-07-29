@@ -1,11 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import UpcomingRace from "../components/UpcomingRace";
-import  ERGASTAPI  from "../constants/apiConst";
-import { formatDate, getCircuitImage, getCircuitLayout } from '../utils/helper';
-import { getFlag } from '../utils/CountryFlags';
 import { circuitData } from "../constants";
+import ERGASTAPI from "../constants/apiConst";
+import { getFlag } from '../utils/CountryFlags';
+import { getCircuitLayout } from '../utils/helper';
 
 const SchedulePage = () => {
     const [races, setRaces] = useState([]);
@@ -27,7 +27,7 @@ const SchedulePage = () => {
     }, []);
 
     return (
-        <main className="ml-64 px-12 py-8 w-full">
+        <main className="px-4 md:px-12 py-8 w-full">
             <UpcomingRace races={races} />
             <div className="text-3xl font-bold mb-8">Race Schedule</div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -64,4 +64,4 @@ const SchedulePage = () => {
     );
 }
 
-export default SchedulePage
+export default SchedulePage;
