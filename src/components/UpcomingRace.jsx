@@ -81,13 +81,12 @@ const UpcomingRace = ({ races }) => {
     useEffect(() => {
         if (!nextEvent) return;
 
-        const interval = setInterval(() => {
+        const updateTimeLeft = () => {
             const now = new Date();
             const distance = nextEvent.datetime - now;
 
             if (distance <= 0) {
                 setTimeLeft("In Progress");
-                clearInterval(interval);
                 return;
             }
 
@@ -97,9 +96,9 @@ const UpcomingRace = ({ races }) => {
             const seconds = String(Math.floor((distance / 1000) % 60)).padStart(2, '0');
 
             setTimeLeft(`${days}d: ${hours}h: ${minutes}m: ${seconds}s`);
-
-        }, 1000);
-
+        };
+        updateTimeLeft();
+        const interval = setInterval(updateTimeLeft, 1000);
         return () => clearInterval(interval);
     }, [nextEvent]);
 
@@ -225,8 +224,6 @@ const UpcomingRace = ({ races }) => {
                                 </div>
                             </div>
                         </div>
-
-                        
                     </div>
                 </div>
             </div>

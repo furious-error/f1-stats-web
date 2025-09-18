@@ -88,7 +88,7 @@ const RaceDetails = () => {
   // console.log(events);
 
   return (
-    <main className="md:px-2 lg:px-12 w-full">
+    <main className="md:px-2 lg:px-4 w-full">
       <div className="h-48 md:h-100 bg-cover bg-center relative m-4 rounded-xl"
         style={{ backgroundImage: `url(${getCircuitImage(race?.Circuit.circuitId)})` }}>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/25 rounded-xl"></div>
