@@ -7,11 +7,36 @@ export function formatDate(dateStr) {
 
 export function formatTime(timeStr) {
     if (!timeStr) return '—';
-    const parts = timeStr.split(' ')[2];
-    const [hours, minutes, seconds] = parts.split(':');
-    const [sec, ms] = seconds.split('.');
-    const totalMinutes = parseInt(hours) * 60 + parseInt(minutes);
-    return `${String(totalMinutes).padStart(2, '0')}:${sec}.${ms.substring(0, 3)}`;
+
+    let rawTime = timeStr;
+    if (typeof rawTime === 'object') {
+        rawTime = rawTime?.Time ?? rawTime?.time ?? rawTime?.millis ?? '';
+    }
+
+    const tokens = String(rawTime).trim().split(' ');
+    const timeToken = tokens.find((token) => token.includes(':')) ?? tokens[tokens.length - 1];
+    if (!timeToken || !timeToken.includes(':')) return '—';
+
+    const segments = timeToken.split(':');
+    if (segments.length < 2) return '—';
+
+    let hours = 0;
+    let minutes = 0;
+    let secondsComponent = segments[segments.length - 1];
+
+    if (segments.length === 3) {
+        hours = parseInt(segments[0], 10) || 0;
+        minutes = parseInt(segments[1], 10) || 0;
+    } else {
+        minutes = parseInt(segments[0], 10) || 0;
+    }
+
+    const [secPart, msPart = '000'] = secondsComponent.split('.');
+    const totalMinutes = hours * 60 + minutes;
+    const seconds = String(parseInt(secPart, 10) || 0).padStart(2, '0');
+    const millis = msPart.padEnd(3, '0').substring(0, 3);
+
+    return `${String(totalMinutes).padStart(2, '0')}:${seconds}.${millis}`;
 }
 
 export function getCircuitImage(circuitId) {

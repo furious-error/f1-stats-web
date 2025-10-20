@@ -1,16 +1,16 @@
-import { formatTime } from '../utils/helper'
 import React from 'react';
+import { formatTime } from '../utils/helper';
 
 function getStatus(status, time) {
     switch (status) {
-        case "Finished":
-            return `+${time}`
+        case "Finished": {
+            const formatted = formatTime(time);
+            return formatted === '—' ? '—' : `+${formatted}`;
+        }
         case "Lapped":
             return "+1 Lap"
         case "Disqualified":
             return "DSQ"
-        case "Retired":
-            return "RET"
         default:
             return "DNF"
     }
@@ -40,7 +40,7 @@ function RaceResult({ result }) {
                             </div>
                             <div className="col-span-3 font-medium">{driver.TeamName}</div>
                             <div className="col-span-1 text-center font-semibold">{driver.Points}</div>
-                            <div className="col-span-2 text-center font-base">{index === 0 ? '—' : getStatus(driver.Status, formatTime(driver.Time))}</div>
+                            <div className="col-span-2 text-center font-base">{index === 0 ? '—' : getStatus(driver.Status, driver.Time)}</div>
                         </div>
                     ))}
                 </div>
@@ -68,7 +68,7 @@ function RaceResult({ result }) {
                             <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
                                 <span className="text-sm text-gray-500">Gap to leader:</span>
                                 <span className="text-sm font-medium text-gray-700">
-                                    {index === 0 ? 'Winner' : getStatus(driver.Status, formatTime(driver.Time))}
+                                    {index === 0 ? 'Winner' : getStatus(driver.Status, driver.Time)}
                                 </span>
                             </div>
                         </div>
